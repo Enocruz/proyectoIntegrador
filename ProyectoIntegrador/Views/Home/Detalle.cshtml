@@ -60,10 +60,6 @@
         cursor: pointer;
     }
 
-    #detalleSospechoso {
-        min-width: 521px;
-        min-height: 392.6px;
-    }
 </style>
 
 <h2>Resultados de búsqueda</h2>
@@ -73,7 +69,7 @@
         <br />
         <div class="row">
             <a href="#" class="pop">
-                <img id="imgHuellaIdentificar" class="img-responsive img" src="~/Content/Images/download.jpg" />
+                <img id="imgHuellaIdentificar" class="img img-responsive" src="~/Content/Images/download.jpg" />
             </a>
         </div>
         <div class="row">
@@ -85,12 +81,12 @@
     </div>
     <div id="detalleSospechoso" class="col-lg-6" style="border: 2px solid #275e8d; display:none;">
         <br />
-        <div class="row" style="text-align:right; padding-right:20px">
+        <div class="row" style="text-align:right; padding-right:5%">
             <i id="close" class="glyphicon glyphicon-remove clickable-row" style="font-size:48px;color:#275e8d;" target="#listaSospechosos" self="#detalleSospechoso"></i>
         </div>
         <div class="row">
             <a href="#" class="pop">
-                <img id="huellaResultado" class="img-responsive img" src="~/Content/Images/imgIndex.png" />
+                <img id="huellaResultado" class="img img-responsive" src="~/Content/Images/imgIndex.png" />
             </a>
         </div>
         <div class="row">
@@ -102,6 +98,8 @@
         <div class="row">
             <h4 align="center">[Lugar de Origen]</h4>
         </div>
+        <p style="padding-bottom:1%"></p>
+       
     </div>
     <div id="listaSospechosos" class="col-lg-6" style="border:2px solid #275e8d; display:block;">
         <table class="table" id="lista">
@@ -160,11 +158,11 @@
 </div>
 <div class="container" style="padding-top:10px">
     <div class="row">
-        <div class="col-md-6 text-center">
+        <div style="padding-bottom:3%" class="col-md-6 text-center">
             <button id="GuardarResultados" data-toggle="modal" data-target="#guardarIdentificacion" class="btn btn-primary">Guardar resultados</button>
 
         </div>
-        <div class="col-md-6 text-center">
+        <div style="padding-bottom:3%" class="col-md-6 text-center">
             <button id="NuevaIdentificacion" class="btn btn-primary">Nueva identificación</button>
         </div>
     </div>
