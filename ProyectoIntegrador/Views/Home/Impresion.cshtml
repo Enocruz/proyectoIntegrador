@@ -28,18 +28,18 @@
 </style>
 
 <div class="container">
-    <div class="container-md">
+    <div class="container-md container-btn">
         <button class="btn-impr" id="jpg">Subir archivo JPG</button>
     </div>
-    <div class="container-md">
+    <div class="container-md container-btn">
         <button class="btn-impr" onclick="scanToJpg()">Conectar escaner</button>
     </div>
 </div>
 
 
 <div class="container container-cn" style="display:none" id="fingerContainer">
-    <div class="container-sm image-container">
-        <img src="#" id="image" class="img-thumbnail" />
+    <div class="container container-sm image-container">
+        <img src="#" id="image" class="img-thumbnail img-res" />
     </div>
     <div class="container-md cnt">
         <div class="container">
@@ -109,7 +109,9 @@
 </div>
 
 <div class="container" style="display:none" id="submitContainer">
-    <button class="btn-submit" onclick="location.href='/Home/Detalle'">Realizar Identificación</button>
+    <div class="container-md" id="btnContainer">
+        <button class="btn-submit" onclick="location.href='/Home/Detalle'">Realizar Identificación</button>
+    </div>
 </div>
 
 
@@ -137,7 +139,7 @@
             reader.onload = function (e) {
                 $('#image').attr('src', e.target.result);
                 $('#fingerContainer').show();
-                $('#submitContainer').show();
+                $('#submitContainer').css('display','flex');
             }
             reader.readAsDataURL(input.files[0]);
         }

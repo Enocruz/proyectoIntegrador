@@ -5158,21 +5158,76 @@ a.list-group-item.active > .badge,
     }
 }
 
-@media (max-width: 1350px) {
+
+
+@media screen and (max-width: 1023px) {
+    .cnt {
+        width: 100% !important;
+    }
+
+    .container-btn {
+        width: 50% !important;
+    }
+    .img-res {
+        width: inherit !important;
+        margin: auto !important;
+        display: block !important;
+    }
+
+    .container-sm {
+        width: 70% !important;
+    }
 }
 
-@media (max-width: 1200px) {
-}
+@media screen and (max-width: 600px) {
+    .container-sm {
+        width: inherit !important;
 
-@media (max-width: 1024px) {
-}
-
-@media (max-width: 860px) {
-}
-
-@media (max-width: 320px) {
+    }
     .navbar {
         padding-left: 5%;
+    }
+    .cnt {
+        width: inherit !important;
+    }
+    .container-md {
+        width: inherit !important;
+    }
+    .container-md-hand-left {
+        width: 200% !important;
+        height: 300px !important;
+        margin-left: 15% !important;
+    }
+    .container-md-hand-right {
+        width: 200% !important;
+        height: 300px !important;
+        margin-left: 15% !important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .navbar {
+        padding-left: 5%;
+    }
+    .cnt {
+        width: inherit !important;
+    }
+    .container-md {
+        width: inherit !important
+    }
+    .container-sm {
+        width: inherit !important;
+    }
+    .container-md-hand-left {
+        width: 200% !important;
+        height: 300px !important;
+        margin-left: 0px !important;
+    }
+
+    .container-md-hand-right {
+        width: 200% !important;
+        height: 300px !important;
+        margin-left: 5% !important;
     }
 }
 
@@ -7200,7 +7255,7 @@ td.visible-print {
     float: left;
     background-image: url("Images/rightHandSelected.png");
     background-repeat: no-repeat;
-    height: 400px;
+    height: 300px;
     align-self: center;
 }
 
@@ -7209,7 +7264,7 @@ td.visible-print {
     float: left;
     background-image: url("Images/leftHandSelected.png");
     background-repeat: no-repeat;
-    height: 400px;
+    height: 300px;
     align-self: center;
 }
 
@@ -7255,3 +7310,15 @@ td.visible-print {
     transform: rotate(75deg);
 }
 
+#submitContainer {
+    justify-content: center !important;
+}
+
+#btnContainer {
+    display: flex;
+    justify-content: center
+}
+
+.btn-submit {
+    margin-left: 0px !important;
+}
