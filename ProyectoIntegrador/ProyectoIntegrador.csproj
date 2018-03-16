@@ -159,10 +159,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="TestCuentaMobile720x720.cs" />
+    <Compile Include="TestDetalleMobile320x480.cs" />
     <Compile Include="TestDetalle.cs" />
     <Compile Include="TestCuenta.cs" />
+    <Compile Include="TestHistorialMobile420x720.cs" />
     <Compile Include="TestHistorial.cs" />
+    <Compile Include="TestHuellaLatenteMobile640x520.cs" />
     <Compile Include="TestHuellaLatente.cs" />
+    <Compile Include="TestIndexMobile320x1080.cs" />
+    <Compile Include="TestNavBarMobile580x420.cs" />
     <Compile Include="TestNavBar.cs" />
     <Compile Include="TestIndex.cs" />
     <Compile Include="Controllers\HomeController.cs" />
