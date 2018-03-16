@@ -5184,15 +5184,19 @@ a.list-group-item.active > .badge,
         width: inherit !important;
 
     }
+    .container-space {
+        font-size: 11px !important;
+    }
     .navbar {
         padding-left: 5%;
     }
     .cnt {
         width: inherit !important;
     }
-    .container-md {
-        width: inherit !important;
+    .container-btn{
+        width: 50% !important;
     }
+    
     .container-md-hand-left {
         width: 200% !important;
         height: 300px !important;
@@ -5202,6 +5206,12 @@ a.list-group-item.active > .badge,
         width: 200% !important;
         height: 300px !important;
         margin-left: 15% !important;
+    }
+
+    .btn-impr {
+        width: 80% !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
     }
 }
 
@@ -7163,11 +7173,12 @@ td.visible-print {
     border-style: solid;
     background-color: steelblue;
     color: white;
-    margin-left: 25%;
+    margin-left: 0px;
     padding-left: 15%;
     padding-right: 15%;
     padding-top: 20px;
     padding-bottom: 20px;
+    width: 60%;
 }
 
 .btn-submit {
@@ -7175,7 +7186,6 @@ td.visible-print {
     border-style: solid;
     background-color: steelblue;
     color: white;
-    margin-left: 40%;
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 20px;
@@ -7319,6 +7329,15 @@ td.visible-print {
     justify-content: center
 }
 
-.btn-submit {
-    margin-left: 0px !important;
+
+
+.container-space {
+    display:flex;
+    justify-content: space-between;
+}
+
+.container-btn {
+    display: flex;
+    justify-content: center;
+    float: none !important;
 }
