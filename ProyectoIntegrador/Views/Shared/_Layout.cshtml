@@ -25,7 +25,7 @@
     <div class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" onclick="showNavbar()">
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -53,5 +53,18 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script type="text/javascript">
+    function showNavbar() {
+        var navbar = $('.navbar-collapse');
+        if (navbar.is(':visible')) {
+            navbar.hide();
+        } else {
+            navbar.show();
+        }
+
+    }
+
+</script>
+
 </body>
 </html>
