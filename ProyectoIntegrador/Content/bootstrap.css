@@ -7294,11 +7294,11 @@ td.visible-print {
     width: 28px;
 }
 
-.round-checkbox input[type="checkbox"] {
+.round-checkbox input[type="radio"] {
     visibility: hidden;
 }
 
-.round-checkbox input[type="checkbox"]:checked + label {
+.round-checkbox input[type="radio"]:checked + label {
     background-color: red;
     border-color: red;
 }
