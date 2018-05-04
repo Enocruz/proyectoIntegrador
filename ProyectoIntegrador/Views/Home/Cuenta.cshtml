@@ -1,4 +1,5 @@
-﻿
+﻿@model Tuple<ProyectoIntegrador.Models.USUARIO, List<ProyectoIntegrador.Models.HISTORIAL>>
+
 @{
     ViewBag.Title = "Historial";
 }
@@ -26,13 +27,18 @@
     }
 </style>
 
-
+@{
+    if (Model.Item1.Creditos < 100)
+    {
+        <h3 style="color:red; text-align:center"> Ya no cuentas con créditos para realizar ninguna acción </h3>
+    }
+}
 <h2>Mi cuenta</h2>
 <div class="container">
     <br />
     <div class="row">
         <div class="col-md-3">
-            <h4>Tipo de licencia: <b style="font-family:'Footlight MT'">FREE</b></h4>
+            <h4>Tipo de licencia: <b style="font-family:'Footlight MT'">@Html.DisplayFor(model => model.Item1.LICENCIA.Nombre)</b></h4>
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary btn-md">Comprar licencia</button>
@@ -40,7 +46,7 @@
     </div>
     <div class="row" style="margin-top:15px">
         <div class="col-md-3">
-            <h4>Créditos: <b style="font-family:'Footlight MT'">456</b></h4>
+            <h4>Créditos: <b style="font-family:'Footlight MT'">@Html.DisplayFor(model => model.Item1.Creditos)</b></h4>
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary btn-md">Comprar créditos</button>
@@ -61,35 +67,45 @@
                     <th data-field="numero" data-sortable="true" scope="col">#</th>
                     <th data-field="fecha" data-sortable="true" scope="col">Fecha</th>
                     <th data-field="caso" data-sortable="true" scope="col">Caso/Identificador</th>
+                    <th data-field="detalle_movimiento" data-sortable="true" scope="col">Detalle movimiento</th>
                     <th data-field="costo" data-sortable="true" scope="col">Costo</th>
                 </tr>
             </thead>
             <tbody id="historyTable">
-                <tr>
-                    <td>1</td>
-                    <td>08/02/2018</td>
-                    <td>Caso-1:33.2</td>
-                    <td>35</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>05/01/2018</td>
-                    <td>Caso-1:33.1</td>
-                    <td>125</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12/02/2017</td>
-                    <td>Caso-2:33.1</td>
-                    <td>45</td>
-                </tr>
+                @{
+                    int count = 1;
+                    float total = 0;
+                }
+                @foreach (var item in Model.Item2)
+                {
+                    <tr>
+                        <td>
+                            @count
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SUBCASO.IDENTIFICADOR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MOVIMIENTO.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MOVIMIENTO.Costo)
+                        </td>
+                    </tr>
+                    total = total + (float)item.MOVIMIENTO.Costo;
+                    count = count + 1;
+                }
             </tbody>
             <tfoot>
                 <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <th id="total">Total :</th>
-                    <td>205</td>
+                    <td>@total</td>
                 </tr>
         </table>
     </div>

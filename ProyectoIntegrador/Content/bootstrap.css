@@ -5168,6 +5168,7 @@ a.list-group-item.active > .badge,
     .container-btn {
         width: 50% !important;
     }
+
     .img-res {
         width: inherit !important;
         margin: auto !important;
@@ -5177,31 +5178,39 @@ a.list-group-item.active > .badge,
     .container-sm {
         width: 70% !important;
     }
+
+    #botonEscaneo {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
     .container-sm {
         width: inherit !important;
-
     }
+
     .container-space {
         font-size: 11px !important;
     }
+
     .navbar {
         padding-left: 5%;
     }
+
     .cnt {
         width: inherit !important;
     }
-    .container-btn{
+
+    .container-btn {
         width: 50% !important;
     }
-    
+
     .container-md-hand-left {
         width: 200% !important;
         height: 300px !important;
         margin-left: 15% !important;
     }
+
     .container-md-hand-right {
         width: 200% !important;
         height: 300px !important;
@@ -5213,21 +5222,29 @@ a.list-group-item.active > .badge,
         padding-top: 10px !important;
         padding-bottom: 10px !important;
     }
+
+    #botonEscaneo {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 320px) {
     .navbar {
         padding-left: 5%;
     }
+
     .cnt {
         width: inherit !important;
     }
+
     .container-md {
         width: inherit !important
     }
+
     .container-sm {
         width: inherit !important;
     }
+
     .container-md-hand-left {
         width: 200% !important;
         height: 300px !important;
@@ -5238,6 +5255,10 @@ a.list-group-item.active > .badge,
         width: 200% !important;
         height: 300px !important;
         margin-left: 5% !important;
+    }
+
+    #botonEscaneo {
+        display: none !important;
     }
 }
 
@@ -7200,7 +7221,7 @@ td.visible-print {
 
 .img-container {
     width: 100%;
-    float:left;
+    float: left;
     margin-left: 25%;
 }
 
@@ -7282,26 +7303,26 @@ td.visible-print {
     position: relative;
 }
 
-.round-checkbox label {
-    background-color: #fff;
-    border: 2px solid red;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 28px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 28px;
-}
+    .round-checkbox label {
+        background-color: #fff;
+        border: 2px solid red;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 28px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 28px;
+    }
 
-.round-checkbox input[type="radio"] {
-    visibility: hidden;
-}
+    .round-checkbox input[type="checkbox"] {
+        visibility: hidden;
+    }
 
-.round-checkbox input[type="radio"]:checked + label {
-    background-color: red;
-    border-color: red;
-}
+        .round-checkbox input[type="checkbox"]:checked + label {
+            background-color: red;
+            border-color: red;
+        }
 
 .round-superior {
     height: 50px !important;
@@ -7332,7 +7353,7 @@ td.visible-print {
 
 
 .container-space {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
 

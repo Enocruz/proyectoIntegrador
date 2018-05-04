@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Modulo_IdentificacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CASO">
+          <Key>
+            <PropertyRef Name="idCaso" />
+          </Key>
+          <Property Name="idCaso" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Detalle" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HISTORIAL">
+          <Key>
+            <PropertyRef Name="idHistorial" />
+          </Key>
+          <Property Name="idHistorial" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idSubCaso" Type="int" Nullable="false" />
+          <Property Name="idMovimiento" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="Huellas_Dactilares">
+          <Key>
+            <PropertyRef Name="idDactilar" />
+          </Key>
+          <Property Name="idDactilar" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido_P" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_nac" Type="date" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="Path_imagen" Type="varchar" MaxLength="255" />
+          <Property Name="REGION" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Huellas_Palmares">
+          <Key>
+            <PropertyRef Name="idPalmar" />
+          </Key>
+          <Property Name="idPalmar" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido_P" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_nac" Type="date" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="Path_imagen" Type="varchar" MaxLength="255" />
+          <Property Name="REGION" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IDENTIFICACION">
+          <Key>
+            <PropertyRef Name="idIdentificacion" />
+            <PropertyRef Name="idSubcaso" />
+          </Key>
+          <Property Name="idIdentificacion" Type="int" Nullable="false" />
+          <Property Name="idSubcaso" Type="int" Nullable="false" />
+          <Property Name="Detalle" Type="varchar" MaxLength="255" />
+          <Property Name="Fecha_guardado" Type="date" />
+        </EntityType>
+        <EntityType Name="LATENTE">
+          <Key>
+            <PropertyRef Name="idHuella" />
+          </Key>
+          <Property Name="idHuella" Type="int" Nullable="false" />
+          <Property Name="REGION" Type="varchar" MaxLength="30" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="PathImagen" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LICENCIA">
+          <Key>
+            <PropertyRef Name="idLicencia" />
+          </Key>
+          <Property Name="idLicencia" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Creditos" Type="int" />
+          <Property Name="Renovacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTO">
+          <Key>
+            <PropertyRef Name="idMovimiento" />
+          </Key>
+          <Property Name="idMovimiento" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="RESULTADOS">
+          <Key>
+            <PropertyRef Name="idResultado" />
+          </Key>
+          <Property Name="idResultado" Type="int" Nullable="false" />
+          <Property Name="idIdentificacion" Type="int" Nullable="false" />
+          <Property Name="idSubcaso" Type="int" Nullable="false" />
+          <Property Name="idHuellaPalmar" Type="int" />
+          <Property Name="idHuellaDactilar" Type="int" />
+          <Property Name="Resultado" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SUBCASO">
+          <Key>
+            <PropertyRef Name="idSubcaso" />
+          </Key>
+          <Property Name="idSubcaso" Type="int" Nullable="false" />
+          <Property Name="idHuella" Type="int" />
+          <Property Name="idCaso" Type="int" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
+          <Property Name="IDENTIFICADOR" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="255" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Organizacion" Type="varchar" MaxLength="255" />
+          <Property Name="Creditos" Type="int" />
+          <Property Name="Fecha_nacimiento" Type="date" />
+          <Property Name="idLicencia" Type="int" />
+          <Property Name="Inicio_Licencia" Type="date" />
+        </EntityType>
+        <Association Name="FK__HISTORIAL__idMov__30F848ED">
+          <End Role="MOVIMIENTO" Type="Self.MOVIMIENTO" Multiplicity="1" />
+          <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MOVIMIENTO">
+              <PropertyRef Name="idMovimiento" />
+            </Principal>
+            <Dependent Role="HISTORIAL">
+              <PropertyRef Name="idMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__idSub__31EC6D26">
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="1" />
+          <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBCASO">
+              <PropertyRef Name="idSubcaso" />
+            </Principal>
+            <Dependent Role="HISTORIAL">
+              <PropertyRef Name="idSubCaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__idUsu__32E0915F">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="HISTORIAL">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IDENTIFIC__idSub__33D4B598">
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="1" />
+          <End Role="IDENTIFICACION" Type="Self.IDENTIFICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBCASO">
+              <PropertyRef Name="idSubcaso" />
+            </Principal>
+            <Dependent Role="IDENTIFICACION">
+              <PropertyRef Name="idSubcaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESULTADO__idHue__5165187F">
+          <End Role="Huellas_Palmares" Type="Self.Huellas_Palmares" Multiplicity="0..1" />
+          <End Role="RESULTADOS" Type="Self.RESULTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huellas_Palmares">
+              <PropertyRef Name="idPalmar" />
+            </Principal>
+            <Dependent Role="RESULTADOS">
+              <PropertyRef Name="idHuellaPalmar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESULTADO__idHue__52593CB8">
+          <End Role="Huellas_Dactilares" Type="Self.Huellas_Dactilares" Multiplicity="0..1" />
+          <End Role="RESULTADOS" Type="Self.RESULTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huellas_Dactilares">
+              <PropertyRef Name="idDactilar" />
+            </Principal>
+            <Dependent Role="RESULTADOS">
+              <PropertyRef Name="idHuellaDactilar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESULTADOS__534D60F1">
+          <End Role="IDENTIFICACION" Type="Self.IDENTIFICACION" Multiplicity="1" />
+          <End Role="RESULTADOS" Type="Self.RESULTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDENTIFICACION">
+              <PropertyRef Name="idIdentificacion" />
+              <PropertyRef Name="idSubcaso" />
+            </Principal>
+            <Dependent Role="RESULTADOS">
+              <PropertyRef Name="idIdentificacion" />
+              <PropertyRef Name="idSubcaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUBCASO__idCaso__34C8D9D1">
+          <End Role="CASO" Type="Self.CASO" Multiplicity="0..1" />
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CASO">
+              <PropertyRef Name="idCaso" />
+            </Principal>
+            <Dependent Role="SUBCASO">
+              <PropertyRef Name="idCaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUBCASO__idHuell__35BCFE0A">
+          <End Role="LATENTE" Type="Self.LATENTE" Multiplicity="0..1" />
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LATENTE">
+              <PropertyRef Name="idHuella" />
+            </Principal>
+            <Dependent Role="SUBCASO">
+              <PropertyRef Name="idHuella" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__idLicen__36B12243">
+          <End Role="LICENCIA" Type="Self.LICENCIA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIA">
+              <PropertyRef Name="idLicencia" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="idLicencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CONSULT_HISTORY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GET_SAVED_IDENTIFICATIONS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idIdentificacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GET_SUBCASES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="case_id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Modulo_IdentificacionModelStoreContainer">
+          <EntitySet Name="CASO" EntityType="Self.CASO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL" EntityType="Self.HISTORIAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Huellas_Dactilares" EntityType="Self.Huellas_Dactilares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Huellas_Palmares" EntityType="Self.Huellas_Palmares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDENTIFICACION" EntityType="Self.IDENTIFICACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LATENTE" EntityType="Self.LATENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICENCIA" EntityType="Self.LICENCIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESULTADOS" EntityType="Self.RESULTADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBCASO" EntityType="Self.SUBCASO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__HISTORIAL__idMov__30F848ED" Association="Self.FK__HISTORIAL__idMov__30F848ED">
+            <End Role="MOVIMIENTO" EntitySet="MOVIMIENTO" />
+            <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__idSub__31EC6D26" Association="Self.FK__HISTORIAL__idSub__31EC6D26">
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+            <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__idUsu__32E0915F" Association="Self.FK__HISTORIAL__idUsu__32E0915F">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IDENTIFIC__idSub__33D4B598" Association="Self.FK__IDENTIFIC__idSub__33D4B598">
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+            <End Role="IDENTIFICACION" EntitySet="IDENTIFICACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESULTADO__idHue__5165187F" Association="Self.FK__RESULTADO__idHue__5165187F">
+            <End Role="Huellas_Palmares" EntitySet="Huellas_Palmares" />
+            <End Role="RESULTADOS" EntitySet="RESULTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESULTADO__idHue__52593CB8" Association="Self.FK__RESULTADO__idHue__52593CB8">
+            <End Role="Huellas_Dactilares" EntitySet="Huellas_Dactilares" />
+            <End Role="RESULTADOS" EntitySet="RESULTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESULTADOS__534D60F1" Association="Self.FK__RESULTADOS__534D60F1">
+            <End Role="IDENTIFICACION" EntitySet="IDENTIFICACION" />
+            <End Role="RESULTADOS" EntitySet="RESULTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUBCASO__idCaso__34C8D9D1" Association="Self.FK__SUBCASO__idCaso__34C8D9D1">
+            <End Role="CASO" EntitySet="CASO" />
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUBCASO__idHuell__35BCFE0A" Association="Self.FK__SUBCASO__idHuell__35BCFE0A">
+            <End Role="LATENTE" EntitySet="LATENTE" />
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__idLicen__36B12243" Association="Self.FK__USUARIO__idLicen__36B12243">
+            <End Role="LICENCIA" EntitySet="LICENCIA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Modulo_IdentificacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CASO">
+          <Key>
+            <PropertyRef Name="idCaso" />
+          </Key>
+          <Property Name="idCaso" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Detalle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SUBCASO" Relationship="Self.FK__SUBCASO__idCaso__34C8D9D1" FromRole="CASO" ToRole="SUBCASO" />
+        </EntityType>
+        <EntityType Name="HISTORIAL">
+          <Key>
+            <PropertyRef Name="idHistorial" />
+          </Key>
+          <Property Name="idHistorial" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idSubCaso" Type="Int32" Nullable="false" />
+          <Property Name="idMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="MOVIMIENTO" Relationship="Self.FK__HISTORIAL__idMov__30F848ED" FromRole="HISTORIAL" ToRole="MOVIMIENTO" />
+          <NavigationProperty Name="SUBCASO" Relationship="Self.FK__HISTORIAL__idSub__31EC6D26" FromRole="HISTORIAL" ToRole="SUBCASO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__HISTORIAL__idUsu__32E0915F" FromRole="HISTORIAL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="Huellas_Dactilares">
+          <Key>
+            <PropertyRef Name="idDactilar" />
+          </Key>
+          <Property Name="idDactilar" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_P" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_nac" Type="DateTime" Precision="0" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Path_imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="REGION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RESULTADOS" Relationship="Self.FK__RESULTADO__idHue__52593CB8" FromRole="Huellas_Dactilares" ToRole="RESULTADOS" />
+        </EntityType>
+        <EntityType Name="Huellas_Palmares">
+          <Key>
+            <PropertyRef Name="idPalmar" />
+          </Key>
+          <Property Name="idPalmar" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_P" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_nac" Type="DateTime" Precision="0" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Path_imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="REGION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RESULTADOS" Relationship="Self.FK__RESULTADO__idHue__5165187F" FromRole="Huellas_Palmares" ToRole="RESULTADOS" />
+        </EntityType>
+        <EntityType Name="IDENTIFICACION">
+          <Key>
+            <PropertyRef Name="idIdentificacion" />
+            <PropertyRef Name="idSubcaso" />
+          </Key>
+          <Property Name="idIdentificacion" Type="Int32" Nullable="false" />
+          <Property Name="idSubcaso" Type="Int32" Nullable="false" />
+          <Property Name="Detalle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_guardado" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="SUBCASO" Relationship="Self.FK__IDENTIFIC__idSub__33D4B598" FromRole="IDENTIFICACION" ToRole="SUBCASO" />
+          <NavigationProperty Name="RESULTADOS" Relationship="Self.FK__RESULTADOS__534D60F1" FromRole="IDENTIFICACION" ToRole="RESULTADOS" />
+        </EntityType>
+        <EntityType Name="LATENTE">
+          <Key>
+            <PropertyRef Name="idHuella" />
+          </Key>
+          <Property Name="idHuella" Type="Int32" Nullable="false" />
+          <Property Name="REGION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PathImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SUBCASO" Relationship="Self.FK__SUBCASO__idHuell__35BCFE0A" FromRole="LATENTE" ToRole="SUBCASO" />
+        </EntityType>
+        <EntityType Name="LICENCIA">
+          <Key>
+            <PropertyRef Name="idLicencia" />
+          </Key>
+          <Property Name="idLicencia" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Creditos" Type="Int32" />
+          <Property Name="Renovacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__idLicen__36B12243" FromRole="LICENCIA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTO">
+          <Key>
+            <PropertyRef Name="idMovimiento" />
+          </Key>
+          <Property Name="idMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HISTORIAL" Relationship="Self.FK__HISTORIAL__idMov__30F848ED" FromRole="MOVIMIENTO" ToRole="HISTORIAL" />
+        </EntityType>
+        <EntityType Name="RESULTADOS">
+          <Key>
+            <PropertyRef Name="idResultado" />
+          </Key>
+          <Property Name="idResultado" Type="Int32" Nullable="false" />
+          <Property Name="idIdentificacion" Type="Int32" Nullable="false" />
+          <Property Name="idSubcaso" Type="Int32" Nullable="false" />
+          <Property Name="idHuellaPalmar" Type="Int32" />
+          <Property Name="idHuellaDactilar" Type="Int32" />
+          <Property Name="Resultado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Huellas_Dactilares" Relationship="Self.FK__RESULTADO__idHue__52593CB8" FromRole="RESULTADOS" ToRole="Huellas_Dactilares" />
+          <NavigationProperty Name="Huellas_Palmares" Relationship="Self.FK__RESULTADO__idHue__5165187F" FromRole="RESULTADOS" ToRole="Huellas_Palmares" />
+          <NavigationProperty Name="IDENTIFICACION" Relationship="Self.FK__RESULTADOS__534D60F1" FromRole="RESULTADOS" ToRole="IDENTIFICACION" />
+        </EntityType>
+        <EntityType Name="SUBCASO">
+          <Key>
+            <PropertyRef Name="idSubcaso" />
+          </Key>
+          <Property Name="idSubcaso" Type="Int32" Nullable="false" />
+          <Property Name="idHuella" Type="Int32" />
+          <Property Name="idCaso" Type="Int32" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IDENTIFICADOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CASO" Relationship="Self.FK__SUBCASO__idCaso__34C8D9D1" FromRole="SUBCASO" ToRole="CASO" />
+          <NavigationProperty Name="HISTORIAL" Relationship="Self.FK__HISTORIAL__idSub__31EC6D26" FromRole="SUBCASO" ToRole="HISTORIAL" />
+          <NavigationProperty Name="IDENTIFICACION" Relationship="Self.FK__IDENTIFIC__idSub__33D4B598" FromRole="SUBCASO" ToRole="IDENTIFICACION" />
+          <NavigationProperty Name="LATENTE" Relationship="Self.FK__SUBCASO__idHuell__35BCFE0A" FromRole="SUBCASO" ToRole="LATENTE" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Organizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Creditos" Type="Int32" />
+          <Property Name="Fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="idLicencia" Type="Int32" />
+          <Property Name="Inicio_Licencia" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HISTORIAL" Relationship="Self.FK__HISTORIAL__idUsu__32E0915F" FromRole="USUARIO" ToRole="HISTORIAL" />
+          <NavigationProperty Name="LICENCIA" Relationship="Self.FK__USUARIO__idLicen__36B12243" FromRole="USUARIO" ToRole="LICENCIA" />
+        </EntityType>
+        <Association Name="FK__SUBCASO__idCaso__34C8D9D1">
+          <End Role="CASO" Type="Self.CASO" Multiplicity="0..1" />
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CASO">
+              <PropertyRef Name="idCaso" />
+            </Principal>
+            <Dependent Role="SUBCASO">
+              <PropertyRef Name="idCaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__idMov__30F848ED">
+          <End Role="MOVIMIENTO" Type="Self.MOVIMIENTO" Multiplicity="1" />
+          <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MOVIMIENTO">
+              <PropertyRef Name="idMovimiento" />
+            </Principal>
+            <Dependent Role="HISTORIAL">
+              <PropertyRef Name="idMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__idSub__31EC6D26">
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="1" />
+          <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBCASO">
+              <PropertyRef Name="idSubcaso" />
+            </Principal>
+            <Dependent Role="HISTORIAL">
+              <PropertyRef Name="idSubCaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORIAL__idUsu__32E0915F">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="HISTORIAL" Type="Self.HISTORIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="HISTORIAL">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESULTADO__idHue__52593CB8">
+          <End Role="Huellas_Dactilares" Type="Self.Huellas_Dactilares" Multiplicity="0..1" />
+          <End Role="RESULTADOS" Type="Self.RESULTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huellas_Dactilares">
+              <PropertyRef Name="idDactilar" />
+            </Principal>
+            <Dependent Role="RESULTADOS">
+              <PropertyRef Name="idHuellaDactilar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESULTADO__idHue__5165187F">
+          <End Role="Huellas_Palmares" Type="Self.Huellas_Palmares" Multiplicity="0..1" />
+          <End Role="RESULTADOS" Type="Self.RESULTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huellas_Palmares">
+              <PropertyRef Name="idPalmar" />
+            </Principal>
+            <Dependent Role="RESULTADOS">
+              <PropertyRef Name="idHuellaPalmar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IDENTIFIC__idSub__33D4B598">
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="1" />
+          <End Role="IDENTIFICACION" Type="Self.IDENTIFICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBCASO">
+              <PropertyRef Name="idSubcaso" />
+            </Principal>
+            <Dependent Role="IDENTIFICACION">
+              <PropertyRef Name="idSubcaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESULTADOS__534D60F1">
+          <End Role="IDENTIFICACION" Type="Self.IDENTIFICACION" Multiplicity="1" />
+          <End Role="RESULTADOS" Type="Self.RESULTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDENTIFICACION">
+              <PropertyRef Name="idIdentificacion" />
+              <PropertyRef Name="idSubcaso" />
+            </Principal>
+            <Dependent Role="RESULTADOS">
+              <PropertyRef Name="idIdentificacion" />
+              <PropertyRef Name="idSubcaso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUBCASO__idHuell__35BCFE0A">
+          <End Role="LATENTE" Type="Self.LATENTE" Multiplicity="0..1" />
+          <End Role="SUBCASO" Type="Self.SUBCASO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LATENTE">
+              <PropertyRef Name="idHuella" />
+            </Principal>
+            <Dependent Role="SUBCASO">
+              <PropertyRef Name="idHuella" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__idLicen__36B12243">
+          <End Role="LICENCIA" Type="Self.LICENCIA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICENCIA">
+              <PropertyRef Name="idLicencia" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="idLicencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Modulo_IdentificacionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CASO" EntityType="Self.CASO" />
+          <EntitySet Name="HISTORIAL" EntityType="Self.HISTORIAL" />
+          <EntitySet Name="Huellas_Dactilares" EntityType="Self.Huellas_Dactilares" />
+          <EntitySet Name="Huellas_Palmares" EntityType="Self.Huellas_Palmares" />
+          <EntitySet Name="IDENTIFICACION" EntityType="Self.IDENTIFICACION" />
+          <EntitySet Name="LATENTE" EntityType="Self.LATENTE" />
+          <EntitySet Name="LICENCIA" EntityType="Self.LICENCIA" />
+          <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" />
+          <EntitySet Name="RESULTADOS" EntityType="Self.RESULTADOS" />
+          <EntitySet Name="SUBCASO" EntityType="Self.SUBCASO" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK__SUBCASO__idCaso__34C8D9D1" Association="Self.FK__SUBCASO__idCaso__34C8D9D1">
+            <End Role="CASO" EntitySet="CASO" />
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__idMov__30F848ED" Association="Self.FK__HISTORIAL__idMov__30F848ED">
+            <End Role="MOVIMIENTO" EntitySet="MOVIMIENTO" />
+            <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__idSub__31EC6D26" Association="Self.FK__HISTORIAL__idSub__31EC6D26">
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+            <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORIAL__idUsu__32E0915F" Association="Self.FK__HISTORIAL__idUsu__32E0915F">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="HISTORIAL" EntitySet="HISTORIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESULTADO__idHue__52593CB8" Association="Self.FK__RESULTADO__idHue__52593CB8">
+            <End Role="Huellas_Dactilares" EntitySet="Huellas_Dactilares" />
+            <End Role="RESULTADOS" EntitySet="RESULTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESULTADO__idHue__5165187F" Association="Self.FK__RESULTADO__idHue__5165187F">
+            <End Role="Huellas_Palmares" EntitySet="Huellas_Palmares" />
+            <End Role="RESULTADOS" EntitySet="RESULTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IDENTIFIC__idSub__33D4B598" Association="Self.FK__IDENTIFIC__idSub__33D4B598">
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+            <End Role="IDENTIFICACION" EntitySet="IDENTIFICACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESULTADOS__534D60F1" Association="Self.FK__RESULTADOS__534D60F1">
+            <End Role="IDENTIFICACION" EntitySet="IDENTIFICACION" />
+            <End Role="RESULTADOS" EntitySet="RESULTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUBCASO__idHuell__35BCFE0A" Association="Self.FK__SUBCASO__idHuell__35BCFE0A">
+            <End Role="LATENTE" EntitySet="LATENTE" />
+            <End Role="SUBCASO" EntitySet="SUBCASO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__idLicen__36B12243" Association="Self.FK__USUARIO__idLicen__36B12243">
+            <End Role="LICENCIA" EntitySet="LICENCIA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <FunctionImport Name="CONSULT_HISTORY" ReturnType="Collection(Modulo_IdentificacionModel.CONSULT_HISTORY_Result)">
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GET_SAVED_IDENTIFICATIONS" ReturnType="Collection(Modulo_IdentificacionModel.GET_SAVED_IDENTIFICATIONS_Result)">
+            <Parameter Name="idIdentificacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GET_SUBCASES" ReturnType="Collection(Modulo_IdentificacionModel.GET_SUBCASES_Result)">
+            <Parameter Name="case_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="CONSULT_HISTORY_Result">
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GET_SAVED_IDENTIFICATIONS_Result">
+          <Property Type="Int32" Name="idCaso" Nullable="false" />
+          <Property Type="String" Name="Detalle" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GET_SUBCASES_Result">
+          <Property Type="Int32" Name="idCaso" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="idHuella" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Modulo_IdentificacionModelStoreContainer" CdmEntityContainer="Modulo_IdentificacionEntities">
+          <EntitySetMapping Name="CASO">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.CASO">
+              <MappingFragment StoreEntitySet="CASO">
+                <ScalarProperty Name="idCaso" ColumnName="idCaso" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.HISTORIAL">
+              <MappingFragment StoreEntitySet="HISTORIAL">
+                <ScalarProperty Name="idHistorial" ColumnName="idHistorial" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idSubCaso" ColumnName="idSubCaso" />
+                <ScalarProperty Name="idMovimiento" ColumnName="idMovimiento" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Huellas_Dactilares">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.Huellas_Dactilares">
+              <MappingFragment StoreEntitySet="Huellas_Dactilares">
+                <ScalarProperty Name="idDactilar" ColumnName="idDactilar" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido_P" ColumnName="Apellido_P" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_nac" ColumnName="Fecha_nac" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Path_imagen" ColumnName="Path_imagen" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Huellas_Palmares">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.Huellas_Palmares">
+              <MappingFragment StoreEntitySet="Huellas_Palmares">
+                <ScalarProperty Name="idPalmar" ColumnName="idPalmar" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido_P" ColumnName="Apellido_P" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_nac" ColumnName="Fecha_nac" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Path_imagen" ColumnName="Path_imagen" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDENTIFICACION">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.IDENTIFICACION">
+              <MappingFragment StoreEntitySet="IDENTIFICACION">
+                <ScalarProperty Name="idIdentificacion" ColumnName="idIdentificacion" />
+                <ScalarProperty Name="idSubcaso" ColumnName="idSubcaso" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="Fecha_guardado" ColumnName="Fecha_guardado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LATENTE">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.LATENTE">
+              <MappingFragment StoreEntitySet="LATENTE">
+                <ScalarProperty Name="idHuella" ColumnName="idHuella" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="PathImagen" ColumnName="PathImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICENCIA">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.LICENCIA">
+              <MappingFragment StoreEntitySet="LICENCIA">
+                <ScalarProperty Name="idLicencia" ColumnName="idLicencia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+                <ScalarProperty Name="Renovacion" ColumnName="Renovacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIMIENTO">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.MOVIMIENTO">
+              <MappingFragment StoreEntitySet="MOVIMIENTO">
+                <ScalarProperty Name="idMovimiento" ColumnName="idMovimiento" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESULTADOS">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.RESULTADOS">
+              <MappingFragment StoreEntitySet="RESULTADOS">
+                <ScalarProperty Name="idResultado" ColumnName="idResultado" />
+                <ScalarProperty Name="idIdentificacion" ColumnName="idIdentificacion" />
+                <ScalarProperty Name="idSubcaso" ColumnName="idSubcaso" />
+                <ScalarProperty Name="idHuellaPalmar" ColumnName="idHuellaPalmar" />
+                <ScalarProperty Name="idHuellaDactilar" ColumnName="idHuellaDactilar" />
+                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBCASO">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.SUBCASO">
+              <MappingFragment StoreEntitySet="SUBCASO">
+                <ScalarProperty Name="idSubcaso" ColumnName="idSubcaso" />
+                <ScalarProperty Name="idHuella" ColumnName="idHuella" />
+                <ScalarProperty Name="idCaso" ColumnName="idCaso" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="IDENTIFICADOR" ColumnName="IDENTIFICADOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="Modulo_IdentificacionModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Organizacion" ColumnName="Organizacion" />
+                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+                <ScalarProperty Name="Fecha_nacimiento" ColumnName="Fecha_nacimiento" />
+                <ScalarProperty Name="idLicencia" ColumnName="idLicencia" />
+                <ScalarProperty Name="Inicio_Licencia" ColumnName="Inicio_Licencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CONSULT_HISTORY" FunctionName="Modulo_IdentificacionModel.Store.CONSULT_HISTORY">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Modulo_IdentificacionModel.CONSULT_HISTORY_Result">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_SAVED_IDENTIFICATIONS" FunctionName="Modulo_IdentificacionModel.Store.GET_SAVED_IDENTIFICATIONS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Modulo_IdentificacionModel.GET_SAVED_IDENTIFICATIONS_Result">
+                <ScalarProperty Name="idCaso" ColumnName="idCaso" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_SUBCASES" FunctionName="Modulo_IdentificacionModel.Store.GET_SUBCASES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Modulo_IdentificacionModel.GET_SUBCASES_Result">
+                <ScalarProperty Name="idCaso" ColumnName="idCaso" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="idHuella" ColumnName="idHuella" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

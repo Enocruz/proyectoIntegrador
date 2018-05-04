@@ -1,6 +1,7 @@
-﻿
+﻿@model List<ProyectoIntegrador.Models.IDENTIFICACION>
+
 @{
-    ViewBag.Title = "Historial";
+    ViewBag.Title = "Impresiones guardadas";
 }
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css" rel="stylesheet" />
@@ -12,7 +13,7 @@
         text-align: center;
     }
 </style>
-<h2>Historial</h2>
+<h2>Tus resultados guardados</h2>
 
 <div class="container">
     <div style="width:100%">
@@ -27,30 +28,23 @@
             <thead>
                 <tr>
                     <th data-field="numero" data-sortable="true" scope="col">#</th>
+                    <th data-field="identificador_subcaso" data-sortable="true" scope="col">Identificador subcaso</th>
                     <th data-field="fecha" data-sortable="true" scope="col">Fecha</th>
-                    <th data-field="caso" data-sortable="true" scope="col">Caso/Identificador</th>
+                    <th data-field="caso" data-sortable="true" scope="col">Nombre del caso</th>
                     <th scope="col">Información</th>
                 </tr>
             </thead>
             <tbody id="historyTable">
-                <tr>
-                    <td>1</td>
-                    <td>08/02/2018</td>
-                    <td>Caso-1:33.2</td>
-                    <td><a id="detalle1" class="btn btn-primary btn-md" style="width:100%" href="/home/Detalle">Detalle</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>05/01/2018</td>
-                    <td>Caso-1:33.1</td>
-                    <td><a id="detalle2" class="btn btn-primary btn-md" style="width:100%" href="/home/Detalle">Detalle</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12/02/2017</td>
-                    <td>Caso-2:33.1</td>
-                    <td><a id="detalle3" class="btn btn-primary btn-md" style="width:100%" href="/home/Detalle">Detalle</a></td>
-                </tr>
+                @foreach (var caso in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => caso.idIdentificacion)</td>
+                        <td>@Html.DisplayFor(modelItem => caso.SUBCASO.IDENTIFICADOR)</td>
+                        <td>@Html.DisplayFor(modelItem => caso.Fecha_guardado)</td>
+                        <td>@Html.DisplayFor(modelItem => caso.SUBCASO.CASO.Nombre)</td>
+                        <td><a id='@("detalle"+caso.idIdentificacion)' class="btn btn-primary btn-md" style="width:100%" href="@Url.Action("Detalle", "Home", new { idSubcaso = caso.idSubcaso })">Detalle</a></td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

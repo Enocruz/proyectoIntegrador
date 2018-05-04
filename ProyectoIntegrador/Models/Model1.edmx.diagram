@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="533df48263c2490d88b72a3dd87f9551" Name="Diagram1">
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.CASO" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.HISTORIAL" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.Huellas_Dactilares" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.Huellas_Palmares" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.IDENTIFICACION" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.LATENTE" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.LICENCIA" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.MOVIMIENTO" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.RESULTADOS" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.SUBCASO" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modulo_IdentificacionModel.USUARIO" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__SUBCASO__idCaso__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__HISTORIAL__idMov__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__HISTORIAL__idSub__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__HISTORIAL__idUsu__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__RESULTADO__idHue__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__RESULTADO__idHue__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__IDENTIFIC__idSub__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__RESULTADOS__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__SUBCASO__idHuell__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="Modulo_IdentificacionModel.FK__USUARIO__idLicen__36B12243" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

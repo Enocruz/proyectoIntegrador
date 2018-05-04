@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Tuple < List < ProyectoIntegrador.Models.CASO > , List <ProyectoIntegrador.Models.SUBCASO>, int?>
+@{
     ViewBag.Title = "Identificación de huella latente";
 }
 
@@ -30,6 +31,7 @@
     }
 </style>
 
+
 <div class="container">
     <div class="row">
         <div class="form-group">
@@ -47,99 +49,47 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="accordion-toggle" data-toggle="collapse" target="#caso-33-1">
-                    <td>Caso 33.1</td>
-                    <td>3</td>
-                    <td><a id="detalle1" class="btn btn-primary md" style="width:100%" data-target="#caso-33-1">Ver detalles</a></td>
-                </tr>
-                <tr>
-                    <td colspan='2' class="accordion-body collapse" id="caso-33-1">
-                        <table class="table">
-                            <thead>
-                            <th></th>
-                            <th>Identificador</th>
-                            <th>Huella</th>
-                            <th></th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>Pulgar I-1</td>
-                                    <td><a href="#" class="pop"><img class="img-responsive img mini" src="~/Content/Images/download.jpg" /></a></td>
-                                    <td><a id="identificar1-1" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Pulgar D-1</td>
-                                    <td><a href="#" class="pop"><img class="img-responsive img mini" src="~/Content/Images/huellas.jpg" /></a></td>
-                                    <td><a id="identificar1-2" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Indice D-1</td>
-                                    <td><a href="#" class="pop"><img class="img-responsive img mini" src="~/Content/Images/hqdefault.jpg" /></a></td>
-                                    <td><a id="identificar1-3" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="accordion-toggle" data-toggle="collapse" target="#caso-33-2">
-                    <td>Caso 33.2</td>
-                    <td>2</td>
-                    <td><a id="detalle2" class="btn btn-primary btn-md" style="width:100%" data-target="#caso-33-2">Ver detalles</a></td>
-                </tr>
-                <tr>
-                    <td colspan='2' class="accordion-body collapse" id="caso-33-2">
-                        <table class="table">
-                            <thead>
-                            <th></th>
-                            <th>Identificador</th>
-                            <th>Huella</th>
-                            <th></th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>Medio I-1</td>
-                                    <td><a href="#" class="pop"><img class="img-responsive img mini" src="~/Content/Images/otra.jpg" /></a></td>
-                                    <td><a id="identificar2-1" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Medio I-2</td>
-                                    <td><a href="#" class="pop"><img class="img-responsive img mini" src="~/Content/Images/download.jpg" /></a></td>
-                                    <td><a id="identificar2-2" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="accordion-toggle" data-toggle="collapse" target="#caso-34-1">
-                    <td>Caso 34.1</td>
-                    <td>1</td>
-                    <td><a id="detalle3" class="btn btn-primary btn-md" style="width:100%" data-target="#caso-34-1">Ver detalles</a></td>
-                </tr>
-                <tr>
-                    <td colspan='2' class="accordion-body collapse" id="caso-34-1">
-                        <table class="table">
-                            <thead>
-                            <th></th>
-                            <th>Identificador</th>
-                            <th>Huella</th>
-                            <th></th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>Pulgar I-1</td>
-                                    <td><a href="#" class="pop"><img class="img-responsive img mini" src="~/Content/Images/blancoadnhifi.jpg" /></a></td>
-                                    <td><a id="identificar3-1" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+                @foreach (var item in Model.Item1)
+                {
+                 var count = 0;
+                    foreach (var subcaso in Model.Item2)
+                    {
+                        if (subcaso.idCaso == item.idCaso)
+                        {
+                            count = count + 1;
+                        }
+                    }
+                   
+                    <tr class="accordion-toggle" data-toggle="collapse" target="#">
+                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                        <td>@count</td>
+                        <td><a id="@item.Nombre" class="btn btn-primary md" style="width:100%" data-target="#@item.idCaso">Ver detalles</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' class="accordion-body collapse" id="@item.idCaso">
+                            <table class="table">
+                                <thead>
+                                <th>Identificador</th>
+                                <th>Huella</th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                    @foreach (var subcaso in Model.Item2)
+                                    {
+                                        if(subcaso.idCaso == item.idCaso)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => subcaso.IDENTIFICADOR)</td>
+                                                <td><a href="#" class="pop"><img class="img-responsive img mini" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(subcaso.LATENTE.Imagen))" /></a></td>
+                                                <td><a id="@subcaso.IDENTIFICADOR" href="@Url.Action("Detalle", "Home", new { idSubcaso = subcaso.idSubcaso, costo = true, movimiento = "Identificacion" })" class="btn btn-primary btn-md" style="width:100%">Identificar</a></td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
 

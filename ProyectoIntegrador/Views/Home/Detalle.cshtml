@@ -1,4 +1,5 @@
-﻿
+﻿@model Tuple<ProyectoIntegrador.Models.SUBCASO, List<float>, List<ProyectoIntegrador.Models.Huellas_Palmares>, List<ProyectoIntegrador.Models.Huellas_Dactilares>>
+
 @{
     ViewBag.Title = "Detalle";
 }
@@ -69,14 +70,14 @@
         <br />
         <div class="row">
             <a href="#" class="pop">
-                <img id="imgHuellaIdentificar" class="img img-responsive" src="~/Content/Images/download.jpg" />
+                <img id="imgHuellaIdentificar" class="img img-responsive" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Item1.LATENTE.Imagen))" />
             </a>
         </div>
         <div class="row">
-            <h3 align="center">Caso 33.1</h3>
+            <h3 align="center">@Model.Item1.CASO.Nombre</h3>
         </div>
         <div class="row">
-            <h4 align="center">Pulgar Izquierdo #3</h4>
+            <h4 align="center">@Model.Item1.IDENTIFICADOR</h4>
         </div>
     </div>
     <div id="detalleSospechoso" class="col-lg-6" style="border: 2px solid #275e8d; display:none;">
@@ -104,54 +105,43 @@
     <div id="listaSospechosos" class="col-lg-6" style="border:2px solid #275e8d; display:block;">
         <table class="table" id="lista">
             <tbody>
-                <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
-                    <td>
-                        <h3>Juan Solis Armado</h3>
-                    </td>
-                    <td>
-                        <h4 style="color:forestgreen">Valor de similitud: 4.35</h4>
-                    </td>
-                </tr>
-                <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
-                    <td>
-                        <h3>Rigoberto Andrade Matias</h3>
-                    </td>
-                    <td>
-                        <h4 style="color:lawngreen">Valor de similitud: 4.00</h4>
-                    </td>
-                </tr>
-                <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
-                    <td>
-                        <h3>Brandon Alain Cruz Ruiz</h3>
-                    </td>
-                    <td>
-                        <h4 style="color:yellowgreen">Valor de similitud: 3.45</h4>
-                    </td>
-                </tr>
-                <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
-                    <td colspan="4">
-                        <h3>Juan Solis</h3>
-                    </td>
-                    <td colspan="12">
-                        <h4 style="color: #b0a21c">Valor de similitud: 3.00</h4>
-                    </td>
-                </tr>
-                <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
-                    <td>
-                        <h3>Mario Lagunes Nava</h3>
-                    </td>
-                    <td>
-                        <h4 style="color:orange">Valor de similitud: 2.48</h4>
-                    </td>
-                </tr>
-                <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
-                    <td>
-                        <h3>Oscar Allan Ruiz Toledo</h3>
-                    </td>
-                    <td>
-                        <h4 style="color:red">Valor de similitud: 1.26</h4>
-                    </td>
-                </tr>
+                @{
+                    int index = 0;
+                }
+                @{
+                    if (Model.Item1.IDENTIFICADOR.Contains("palma"))
+                    {
+                        foreach (var sujeto in Model.Item3)
+                        {
+
+                            <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
+                                <td>
+                                    <h3>@sujeto.Nombre @sujeto.Apellido_P</h3>
+                                </td>
+                                <td>
+                                    <h4 style="color:forestgreen">@Model.Item2[index]</h4>
+                                </td>
+                            </tr>
+                            index = index + 1;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var sujeto in Model.Item4)
+                        {
+
+                            <tr class='clickable-row' target="#detalleSospechoso" self="#listaSospechosos">
+                                <td>
+                                    <h3>@sujeto.Nombre @sujeto.Apellido_P</h3>
+                                </td>
+                                <td>
+                                    <h4 style="color:">@Model.Item2[index]</h4>
+                                </td>
+                            </tr>
+                        index = index + 1;
+                        }
+                    }
+                }
             </tbody>
         </table>
     </div>
@@ -160,7 +150,6 @@
     <div class="row">
         <div style="padding-bottom:3%" class="col-md-6 text-center">
             <button id="GuardarResultados" data-toggle="modal" data-target="#guardarIdentificacion" class="btn btn-primary">Guardar resultados</button>
-
         </div>
         <div style="padding-bottom:3%" class="col-md-6 text-center">
             <button id="NuevaIdentificacion" class="btn btn-primary">Nueva identificación</button>
@@ -187,10 +176,10 @@
                 <h4 class="modal-title">¿Deseas guardar los resultados?</h4>
             </div>
             <div class="modal-body">
-                <p>Se descontarán 30 créditos de tu cuenta.</p>
+                <p>Se descontarán 150 créditos de tu cuenta.</p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-success" href="/home/Historial">Aceptar</a>
+                <a class="btn btn-success" href="@Url.Action("GuardarResultados", "Home", new { idSubcaso = Model.Item1.idSubcaso })">Aceptar</a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

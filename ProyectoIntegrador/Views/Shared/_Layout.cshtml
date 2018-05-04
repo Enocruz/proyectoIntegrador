@@ -34,10 +34,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Huellas latentes", "Latente", "Home")</li>
                     <li>@Html.ActionLink("Impresiones de huellas", "Impresion", "Home")</li>
-                    <li>@Html.ActionLink("Historial", "Historial", "Home")</li>
+                    <li>@Html.ActionLink("Identificaciones guardadas", "Historial", "Home")</li>
                     <li>@Html.ActionLink("Mi cuenta", "Cuenta", "Home")</li>
                 </ul>
-                <h4 class="navbar-right text-center" style="text-align:center;color:white">Tus créditos: 456</h4>
+                <h4 class="navbar-right text-center" style="text-align:center;color:white">Tus créditos: @ViewBag.creditos</h4>
             </div>
 
         </div>
@@ -46,7 +46,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align:center">&copy; Brandon Cruz & Oscar Ruiz</p>
+            <p style="text-align:center">&copy; Rodrigo Benavides, Brandon Cruz, Oscar Ruiz</p>
         </footer>
     </div>
 

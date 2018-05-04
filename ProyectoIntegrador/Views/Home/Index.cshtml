@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ProyectoIntegrador.Models.USUARIO
+@{
     ViewBag.Title = "Index";
 }
 <style>
@@ -13,6 +14,7 @@
         margin-right: auto;
         display: block;
     }
+
     .row {
         overflow: hidden;
     }
@@ -24,6 +26,7 @@
 </style>
 
 <div class="container">
+    <h3>Bienvenido @Html.DisplayFor(model => model.Nombre)</h3>
     <h2 style="text-align:center;font-family:'Footlight MT'">Identificación de huellas latentes e impresiones</h2>
     <br />
     <div class="row">
@@ -41,13 +44,13 @@
         <h3 style="text-align:center; padding-top:5%">Realizar identificación de huella latente</h3>
         <br />
         <p style="text-align:center"><i class="glyphicon glyphicon-hdd" style="font-size:48px;color:white"></i></p>
-        <p style="text-align:center"><a id="identificacionLatente" href="/home/Latente"class="btn input-block-level form-control">Iniciar</a></p>
+        <p style="text-align:center"><a id="identificacionLatente" href="/home/Latente" class="btn input-block-level form-control">Iniciar</a></p>
     </div>
     <div class="col-md-4 img-rounded" style="background-color:darkgray; color:steelblue;">
         <h3 style="text-align:center; padding-top:5%">Realizar identificación de huella de impresión</h3>
         <br />
         <p style="text-align:center"><i class="glyphicon glyphicon-cloud-upload" style="font-size:48px;color:white"></i></p>
-        <p style="text-align:center"><a id="identificacionImpresion" href="/home/Impresion"class="btn input-block-level form-control">Iniciar</a></p>
+        <p style="text-align:center"><a id="identificacionImpresion" href="/home/Impresion" class="btn input-block-level form-control">Iniciar</a></p>
     </div>
     <div class="col-md-4 img-rounded" style="background-color:deepskyblue; color:white;">
         <h3 style="text-align:center; padding-top:5%">Ver historial de identificaciones realizadas</h3>
