@@ -5177,6 +5177,10 @@ a.list-group-item.active > .badge,
     .container-sm {
         width: 70% !important;
     }
+
+    #botonEscaneo {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -5213,6 +5217,10 @@ a.list-group-item.active > .badge,
         padding-top: 10px !important;
         padding-bottom: 10px !important;
     }
+
+    #botonEscaneo {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -5238,6 +5246,10 @@ a.list-group-item.active > .badge,
         width: 200% !important;
         height: 300px !important;
         margin-left: 5% !important;
+    }
+
+    #botonEscaneo {
+        display: none !important;
     }
 }
 
