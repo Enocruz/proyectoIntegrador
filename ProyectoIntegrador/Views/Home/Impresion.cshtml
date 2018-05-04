@@ -27,110 +27,143 @@
             }
 </style>
 
-<div class="container container-space">
-    <div class="container-md container-btn">
-        <button class="btn-impr" id="jpg">Subir archivo JPG</button>
-    </div>
-    <div class="container-md container-btn">
-        <button class="btn-impr" onclick="scanToJpg()">Conectar escaner</button>
-    </div>
-</div>
-
-
-<div class="container container-cn" style="display:none" id="fingerContainer">
-    <div class="container container-sm image-container">
-        <img src="#" id="image" class="img-thumbnail img-res" />
-    </div>
-    <div class="container-md cnt">
-        <div class="container">
-            <h4 class="inst-text">Selecciona la región a la que pertenece la huella</h4>
+<form id="impresionForm">
+    <div class="container container-space">
+        <div class="container-md container-btn">
+            <button class="btn-impr" id="jpg">Subir archivo JPG</button>
         </div>
-
-        <div class="container">
-            <div class="container-md-hand-left">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="pulgarIzquierdo" name="region" />
-                    <label for="pulgarIzquierdo" style="margin-left:10px; margin-top:155px"></label>
-
-                    <input type="checkbox" id="indiceIzquierdo" name="region" />
-                    <label for="indiceIzquierdo" style="margin-left:78px; margin-top:17px"></label>
-
-                    <input type="checkbox" id="medioIzquierdo" name="region" />
-                    <label for="medioIzquierdo" style="margin-left:115px; margin-top:0px"></label>
-
-                    <input type="checkbox" id="anularIzquierdo" name="region" />
-                    <label for="anularIzquierdo" style="margin-left:155px; margin-top:6px"></label>
-
-                    <input type="checkbox" id="meniqueIzquierdo" name="region" />
-                    <label for="meniqueIzquierdo" style="margin-left:193px; margin-top:29px"></label>
-
-                    <input type="checkbox" id="superiorIzquierda" name="region" />
-                    <label for="superiorIzquierda" class="round-superior" style="margin-left:90px; margin-top:115px"></label>
-
-                    <input type="checkbox" id="hipotenarIzquierda" name="region" />
-                    <label for="hipotenarIzquierda" class="round-hipotenar" style="margin-left:136px; margin-top:180px"></label>
-
-                    <input type="checkbox" id="tenarIzquierda" name="region" />
-                    <label for="tenarIzquierda" class="round-tenar" style="margin-left:75px; margin-top:180px"></label>
-
-                </div>
-
+        <div class="container-md container-btn" id="botonEscaneo">
+            <button class="btn-impr" onclick="scanToJpg()">Conectar escaner</button>
+        </div>
+        <input type="file" name="image" id="imageInput" accept="image/jpeg" class="hidden">
+    </div>
+    @if (ViewBag.Error != null)
+    {
+        <div class="help-block" style="border-color: orangered;">
+            <p class="text-center" style="color: red; padding-top: 30px;">@ViewBag.Error</p>    
+        </div>
+    }
+    <div class="container container-cn" style="display:none" id="fingerContainer">
+        <div class="container container-sm image-container">
+            <img src="#" id="image" class="img-thumbnail img-res" />
+        </div>
+        <div class="container-md cnt">
+            <div class="container">
+                <h4 class="inst-text">Selecciona la región a la que pertenece la huella</h4>
             </div>
-            <div class="container-md-hand-right">
-                <div class="round-checkbox">
-                    <input type="checkbox" id="pulgarDerecho" name="region" />
-                    <label for="pulgarDerecho" style="margin-left: 218px; margin-top:155px"></label>
 
-                    <input type="checkbox" id="indiceDerecho" name="region" />
-                    <label for="indiceDerecho" style="margin-left:152px; margin-top:17px"></label>
+            <div class="container">
+                <div class="container-md-hand-left">
+                    <div class="round-checkbox">
+                        <input type="checkbox" id="pulgarIzquierdo" name="region0" />
+                        <label for="pulgarIzquierdo" style="margin-left:10px; margin-top:155px"></label>
 
-                    <input type="checkbox" id="medioDerecho" name="region" />
-                    <label for="medioDerecho" style="margin-left:111px; margin-top:0px"></label>
+                        <input type="checkbox" id="indiceIzquierdo" name="region1" />
+                        <label for="indiceIzquierdo" style="margin-left:78px; margin-top:17px"></label>
 
-                    <input type="checkbox" id="anularDerecho" name="region" />
-                    <label for="anularDerecho" style="margin-left:72px; margin-top:6px"></label>
+                        <input type="checkbox" id="medioIzquierdo" name="region2" />
+                        <label for="medioIzquierdo" style="margin-left:115px; margin-top:0px"></label>
 
-                    <input type="checkbox" id="meniqueDerecho" name="region" />
-                    <label for="meniqueDerecho" style="margin-left:34px; margin-top:29px"></label>
+                        <input type="checkbox" id="anularIzquierdo" name="region3" />
+                        <label for="anularIzquierdo" style="margin-left:155px; margin-top:6px"></label>
 
-                    <input type="checkbox" id="superiorDerecho" name="region" />
-                    <label for="superiorDerecho" class="round-superior" style="margin-left:45px; margin-top:115px"></label>
+                        <input type="checkbox" id="meniqueIzquierdo" name="region4" />
+                        <label for="meniqueIzquierdo" style="margin-left:193px; margin-top:29px"></label>
 
-                    <input type="checkbox" id="hipotenarDerecho" name="region" />
-                    <label for="hipotenarDerecho" class="round-tenar" style="margin-left:30px; margin-top:180px"></label>
+                        <input type="checkbox" id="superiorIzquierda" name="region5" />
+                        <label for="superiorIzquierda" class="round-superior" style="margin-left:90px; margin-top:115px"></label>
 
-                    <input type="checkbox" id="tenarDerecho" name="region" />
-                    <label for="tenarDerecho" class="round-hipotenar" style="margin-left:90px; margin-top:180px"></label>
+                        <input type="checkbox" id="hipotenarIzquierda" name="region6" />
+                        <label for="hipotenarIzquierda" class="round-hipotenar" style="margin-left:136px; margin-top:180px"></label>
 
+                        <input type="checkbox" id="tenarIzquierda" name="region7" />
+                        <label for="tenarIzquierda" class="round-tenar" style="margin-left:75px; margin-top:180px"></label>
+
+                    </div>
+                </div>
+                <div class="container-md-hand-right">
+                    <div class="round-checkbox">
+                        <input type="checkbox" id="pulgarDerecho" name="region8" />
+                        <label for="pulgarDerecho" style="margin-left: 218px; margin-top:155px"></label>
+
+                        <input type="checkbox" id="indiceDerecho" name="region9" />
+                        <label for="indiceDerecho" style="margin-left:152px; margin-top:17px"></label>
+
+                        <input type="checkbox" id="medioDerecho" name="region10" />
+                        <label for="medioDerecho" style="margin-left:111px; margin-top:0px"></label>
+
+                        <input type="checkbox" id="anularDerecho" name="region11" />
+                        <label for="anularDerecho" style="margin-left:72px; margin-top:6px"></label>
+
+                        <input type="checkbox" id="meniqueDerecho" name="region12" />
+                        <label for="meniqueDerecho" style="margin-left:34px; margin-top:29px"></label>
+
+                        <input type="checkbox" id="superiorDerecho" name="region13" />
+                        <label for="superiorDerecho" class="round-superior" style="margin-left:45px; margin-top:115px"></label>
+
+                        <input type="checkbox" id="hipotenarDerecho" name="region14" />
+                        <label for="hipotenarDerecho" class="round-tenar" style="margin-left:30px; margin-top:180px"></label>
+
+                        <input type="checkbox" id="tenarDerecho" name="region15" />
+                        <label for="tenarDerecho" class="round-hipotenar" style="margin-left:90px; margin-top:180px"></label>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <div class="container" style="display:none" id="submitContainer">
     <div class="container-md" id="btnContainer">
-        <button class="btn-submit" onclick="location.href='/Home/Detalle'">Realizar Identificación</button>
+        <button class="btn-submit" onclick="compressImage()" id="buttonId">Realizar Identificación</button>
     </div>
 </div>
+
+
 
 
 
 <script src="https://asprise.azureedge.net/scannerjs/scanner.js" type="text/javascript"></script>
-
+<script src="~/Scripts/jszip.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
     $("#jpg").click(function () {
-        var input = $(document.createElement('input'));
-        input.attr("id", "imageHuella");
-        input.attr("type", "file");
+        var input = $('#imageInput');
         input.trigger('click');
-        input.change(function () {
-            loadImage(this);
-        });
         return false;
     });
+
+    $('#imageInput').change(function () {
+        loadImage(this);
+    });
+
+    function compressImage() {
+        var button = $('#buttonId');
+        button.prop('disabled', true)
+        button.css('background-color', 'gray');
+        button.css('color', 'black');
+        var form = $('#impresionForm');
+        var input = $('#impresionForm [name=image]')[0];
+        if (input.files && input.files[0]) {
+            var zip = new JSZip();
+            zip.file('image.jpg', input.files[0]);
+            zip.generateAsync({ type: "blob" }).then((data) => {
+                var formData = new FormData(form.get(0));
+                formData.delete('image');
+                formData.append('image', data);
+                var request = new XMLHttpRequest();
+                request.open("POST", location.href, true);
+                request.onload = function () {
+                    console.log(request.responseURL);
+                    window.location.replace(request.responseURL);
+                };
+                request.send(formData);
+            });
+        }
+    }
+
 
     function loadImage(input) {
 
